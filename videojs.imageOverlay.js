@@ -1,7 +1,7 @@
 /*
  *  Copyright (c) 2013 Funny or Die, Inc.
  *  http://www.funnyordie.com
- *  https://github.com/funnyordie/videojs-imageOverlay/blob/master/LICENSE.md
+ *  https://github.com/funnyordie/videojs-imageOverlay/blob/master/LICENSE
  */
 
 (function(vjs) {
