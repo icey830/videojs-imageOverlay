@@ -29,7 +29,7 @@ Adds a clickable image over the top of the player that is displayed during a spe
   * __image_url__ (required): location of the image
   * __click_url__: where the image links to
   * __opacity__: css opacity of the image, default is 0.7
-  * __start_time__: time (in seconds) when the image displays skip if you want the image to be displayed at start of * playback
+  * __start_time__: time (in seconds) when the image displays skip if you want the image to be displayed at start of  playback
   * __end_time__: time (in seconds) when the image disappears
   * __height__: css height of the image's container div, default is 15% of the video. Image takes up 100% of this element's height
   * __width__: css width of the container div, default is 100%
