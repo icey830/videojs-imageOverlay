@@ -37,10 +37,12 @@
     if (settings.start_time === null)
       settings.start_time = 0;
 
-    if (settings.end_time === null)
-      settings.end_time = player.duration() + 1;
-
     overlay = {
+      checkEndTime: function() {
+        if (settings.end_time === null) {
+          settings.end_time = player.duration() + 1;
+        }
+      },
       checkOverlay: function() {
         if ((player.currentTime() >= settings.start_time) && (player.currentTime() < settings.end_time)) {
           overlay.showImage();
@@ -79,6 +81,7 @@
     };
 
     player.on('timeupdate', overlay.checkOverlay);
+    player.on('loadedmetadata', overlay.checkEndTime);
   };
 
   vjs.plugin('imageOverlay', imageOverlay);
