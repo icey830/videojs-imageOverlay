@@ -5,6 +5,8 @@ Adds a clickable image over the top of the player that is displayed during a spe
 
 ![videojs-imageOverlay](http://assets0.ordienetworks.com/misc/videojs/imageOverlay.jpg)
 
+You can optionally not set an image, height or width and the entire video will be clickable during the start_time - end_time
+
 ## USAGE:
 
 ```html
@@ -26,7 +28,7 @@ Adds a clickable image over the top of the player that is displayed during a spe
 ```
 
 ## OPTIONS:
-  * __image_url__ (required): location of the image
+  * __image_url__ (optional): location of the image
   * __click_url__: where the image links to
   * __opacity__: css opacity of the image, default is 0.7
   * __start_time__: time (in seconds) when the image displays skip if you want the image to be displayed at start of  playback
