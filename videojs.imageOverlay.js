@@ -1,37 +1,22 @@
 /*
  *  Copyright (c) 2013 Funny or Die, Inc.
  *  http://www.funnyordie.com
- *  https://github.com/funnyordie/videojs-imageOverlay/blob/master/LICENSE
+ *  https://github.com/funnyordie/videojs-imageOverlay/blob/master/LICENSE.md
  */
 
-(function(vjs) {
-  var
-  extend = function(obj) {
-    var arg, i, k;
-    for (i = 1; i < arguments.length; i++) {
-      arg = arguments[i];
-      for (k in arg) {
-        if (arg.hasOwnProperty(k)) {
-          obj[k] = arg[k];
-        }
-      }
-    }
-    return obj;
-  },
-
-  defaults = {
-      image_url: '',
+(function(window, videojs) {
+  var defaults = {
+      image_url: null,
       click_url:     '',
       start_time: null,
       end_time: null,
       opacity: 0.7,
-      height: '15%',
+      height: '100%',
       width: '100%'
   },
-
   imageOverlay = function(options) {
     var player = this,
-        settings = extend({}, defaults, options || {}),
+        settings = videojs.mergeOptions(defaults, options),
         showingImage = false;
 
     if (settings.start_time === null)
@@ -55,20 +40,23 @@
           return;
         }
         showingImage = true;
-        var holderDiv = document.createElement('div');
+        var holderDiv = document.createElement('a');
         holderDiv.id = 'vjs-image-overlay-holder';
         holderDiv.style.height = settings.height;
         holderDiv.style.width = settings.width;
 
-        var overlayImage = document.createElement('img');
-        overlayImage.src = settings.image_url;
-        overlayImage.onclick = function() {
+        if (settings.image_url) {
+            var overlayImage = document.createElement('img');
+            overlayImage.src = settings.image_url;
+            overlayImage.style.opacity = settings.opacity;
+            holderDiv.appendChild(overlayImage);
+        }
+
+        holderDiv.onclick = function() {
           player.pause();
           window.open(settings.click_url);
         };
-        overlayImage.style.opacity = settings.opacity;
 
-        holderDiv.appendChild(overlayImage);
         player.el().appendChild(holderDiv);
       },
       hideImage: function() {
@@ -84,5 +72,5 @@
     player.on('loadedmetadata', overlay.checkEndTime);
   };
 
-  vjs.plugin('imageOverlay', imageOverlay);
-}(window.videojs));
+  videojs.plugin('imageOverlay', imageOverlay);
+}(window, window.videojs));
